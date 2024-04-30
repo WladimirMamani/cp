@@ -1,0 +1,159 @@
+<!-- <p>Módulo de PEDIDOS</p> -->
+
+<!-- SECICIÓN DE PEDIDOS -->
+<c-row ngPreserveWhitespaces>
+  <c-col xs="12">
+    <c-card class="mb-4">
+      <c-card-header>
+        <strong>FORMULARIO PEDIDOS</strong>
+      </c-card-header>
+      <c-card-body>
+        <form cForm class="row g-3">
+          <div class="col-auto">
+            <label cLabel for="codigo"><b>Código</b></label>
+            <input cFormControl id="codigo" rows="3" type="number" name="codigo" placeholder="0.00"
+              [(ngModel)]="pedido.codigo" />
+          </div>
+          <div class="col-auto">
+            <label cLabel for="descripcion"><b>Descripción</b></label>
+            <input cFormControl id="descripcion" [(ngModel)]="pedido.descripcion" placeholder="Ingrese descripción"
+              name="descripcion" type="text" />
+          </div>
+          <div class="col-auto">
+            <label cLabel for="cantidad"><b>Cantidad</b></label>
+            <input cFormControl id="cantidad" rows="3" type="number" name="cantidad" [(ngModel)]="pedido.cantidad" />
+          </div>
+          <div class="col-auto">
+            <label cLabel for="precio"><b>Precio</b></label>
+            <input cFormControl id="precio" rows="3" type="number" name="precio" [(ngModel)]="pedido.precio" />
+          </div>
+          <div class="col-auto">
+            <label cLabel for="talla"><b>Talla</b></label>
+            <input cFormControl id="talla" rows="3" type="text" name="talla" [(ngModel)]="pedido.talla" />
+          </div>
+          <div class="col-auto">
+            <label cLabel for="categoria"><b>Categoría</b></label>
+            <input cFormControl id="categoria" [(ngModel)]="pedido.categoria" placeholder="Nombre de categoria"
+              name="categoria" type="text" />
+          </div>
+          <div class="col-auto">
+            <label cLabel for="formFile"><b>Añadir Imagen</b></label>
+            <input cFormControl id="formFile" type="file" />
+            <!-- <input cFormControl id="imagen" [(ngModel)]="pedido.imagen" placeholder="Nombre de imagen" name="imagen"
+              type="text" /> -->
+          </div>
+
+          <div class="col-auto">
+            <label cLabel for="fecha"><b>Fecha</b></label>
+            <input cFormControl id="fecha" rows="3" type="date" name="fecha" [(ngModel)]="pedido.fecha" />
+          </div>
+
+        </form>
+        <br>
+        <c-row>
+          <c-col>
+            <button (click)="agregarPedido()" cButton color="success"><b>GUARDAR REGISTRO</b></button>
+          </c-col>
+        </c-row>
+      </c-card-body>
+    </c-card>
+  </c-col>
+</c-row>
+
+<!-- SECCIÓN DE CONSULTAS -->
+<c-row ngPreserveWhitespaces>
+  <c-col xs="12">
+    <c-card class="mb-4">
+      <c-card-header>
+        <strong>CONSULTAS</strong>
+      </c-card-header>
+      <c-card-body>
+        <form cForm class="row g-3">
+          <div class="col-auto">
+            <button cButton class="me-1" color="primary" type="button" (click)="getOrdenarPedidoPorCodigoDesc()">
+              Consulta 1
+            </button>
+          </div>
+          <div class="col-auto">
+            <button cButton class="me-1" color="primary" type="button" (click)="getListarPorNombre()">
+              Consulta 2
+            </button>
+          </div>
+          <div class="col-auto">
+            <button cButton class="me-1" color="primary" type="button" (click)="getListarPorFechaPedidoDesc()">
+              Consulta 3
+            </button>
+          </div>
+          <div class="col-auto">
+            <button cButton class="me-1" color="primary" type="button" (click)="getBuscarPrecioAlto()">
+              Consulta 4
+            </button>
+          </div>
+          <div class="col-auto">
+            <button cButton class="me-1" color="primary" type="button" (click)="getBuscarPrecioAlto()">
+              Consulta 5
+            </button>
+          </div>
+        </form>
+      </c-card-body>
+    </c-card>
+  </c-col>
+</c-row>
+
+<!-- DATA TABLE -->
+<c-row ngPreserveWhitespaces>
+  <c-col xs="12">
+    <c-card class="mb-4">
+      <c-card-header>
+        <strong>LISTA DE PEDIDOS</strong>
+      </c-card-header>
+      <c-card-body>
+        <!-- <app-docs-example href="components/table#hoverable-rows"> -->
+        <table [hover]="true" cTable>
+          <thead>
+            <tr>
+              <th scope="col">Código</th>
+              <th scope="col">Descripción</th>
+              <th scope="col">Cantidad</th>
+              <th scope="col">Precio</th>
+              <th scope="col">Talla</th>
+              <th scope="col">Categoría</th>
+              <th scope="col">Imagen</th>
+              <th scope="col">Fecha</th>
+              <th scope="col">EDITAR</th>
+              <th scope="col">ELIMINAR</th>
+            </tr>
+          </thead>
+          <tbody> @for (item of listaPedidos; track item) {
+            <tr>
+              <th scope="row">{{ item.codigo }}</th>
+              <td>{{ item.descripcion }}</td>
+              <td>{{ item.cantidad }}</td>
+              <td>{{ item.precio }}</td>
+              <td>{{ item.talla }}</td>
+              <td>{{ item.categoria }}</td>
+              <td>{{ item.imagen }}</td>
+              <td>{{ item.fecha }}</td>
+              <td>
+                <button cButton class="me-1" color="warning" variant="outline" type="button"
+                  (click)="editarPedido(item)">
+                  Editar
+                </button>
+              </td>
+              <td>
+                <button cButton class="me-1" color="danger" variant="ghost" type="button"
+                  (click)="eliminarPedido(item)">
+                  Eliminar
+                </button>
+              </td>
+            </tr>
+            }
+          </tbody>
+        </table>
+
+        <!-- </app-docs-example> -->
+      </c-card-body>
+    </c-card>
+  </c-col>
+
+</c-row>
